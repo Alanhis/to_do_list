@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "Alanhis",
+      "password": "123"
+    },
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$YO9t/YY7CIXfLv0bZ8d/MOu5dX8K8uQoHhoocxZjMElYfOx86PvpS",
+      "id": 2
+    },
+    {
+      "email": "alanhis@mail.com",
+      "password": "$2a$10$VTLRxZqMyxY1MvA0TxaMmeipz3yzH4CkQsaZc8FnWj7Yj.dW4h8JK",
+      "id": 3
+    }
+  ],
+  "todo": [
+   {
+    "id": 1684255572616,
+    "text": "n",
+    "isDone": false
+}
+  ]
+}
