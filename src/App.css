@@ -63,6 +63,10 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+  padding: 10px;
   align-items: center;
-  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  color: black;
+  background: white;
 }
