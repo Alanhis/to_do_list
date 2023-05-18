@@ -8,6 +8,7 @@ import {
 import { createContext, useContext } from 'react';
 import {
   deleteTodos,
+  getFiltredTodos,
   getIdTodos,
   getTodos,
   postTodos,
@@ -65,15 +66,40 @@ export class TodoList {
     });
   };
 
-  @computed
-  get finishedTodos(): TodoItem[] {
-    return this.list.filter(todo => todo.isDone);
-  }
+  @action finishedTodos = () => {
+    this.list = [];
+    getFiltredTodos(true).then(todo =>
+      runInAction(() => {
+        if (todo.length > 1) {
+          todo.forEach(data => {
+            this.list.push(new TodoItem(data.text, data.isDone));
+          });
+        } else if (todo.length === 0) {
+          return;
+        } else {
+          this.list.push(new TodoItem(todo[0].text, todo[0].isDone));
+        }
+      })
+    );
+  };
 
-  @computed
-  get openTodos(): TodoItem[] {
-    return this.list.filter(todo => !todo.isDone);
-  }
+  @action
+  openTodos = () => {
+    this.list = [];
+    getFiltredTodos(false).then(todo =>
+      runInAction(() => {
+        if (todo.length > 1) {
+          todo.forEach(data => {
+            this.list.push(new TodoItem(data.text, data.isDone));
+          });
+        } else if (todo.length === 0) {
+          return;
+        } else {
+          this.list.push(new TodoItem(todo[0].text, todo[0].isDone));
+        }
+      })
+    );
+  };
 }
 
 export default class TodoItem {
@@ -87,11 +113,6 @@ export default class TodoItem {
     this.text = text;
     makeAutoObservable(this);
   }
-
-  @action
-  toggleIsDone = () => {
-    this.isDone = !this.isDone;
-  };
 }
 
 export const StoreContext = createContext<TodoList>({} as TodoList);

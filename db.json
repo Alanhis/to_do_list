@@ -19,17 +19,12 @@
   "todo": [
     {
       "text": "test",
-      "isDone": true,
+      "isDone": false,
       "id": 1684424714797
     },
     {
-      "text": "test",
-      "isDone": false,
-      "id": 1684424789405
-    },
-    {
       "text": "amongus",
-      "isDone": false,
+      "isDone": true,
       "id": 1684424816398
     }
   ]

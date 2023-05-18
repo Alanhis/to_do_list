@@ -39,3 +39,8 @@ export const getIdTodos = async (index: number): Promise<TodoItem[]> => {
     'http://localhost:3000/todo?_start=' + index + '&_limit=1'
   ).then(data => data.json());
 };
+export const getFiltredTodos = async (type: boolean): Promise<TodoItem[]> => {
+  return await fetch('http://localhost:3000/todo?isDone=' + type).then(data =>
+    data.json()
+  );
+};

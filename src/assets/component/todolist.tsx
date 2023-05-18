@@ -14,37 +14,30 @@ export const TodoList = () => {
         <div className="todo-filter">
           <button
             onClick={() => {
-              setStatus('all');
+              todoList.list = [];
+              todoList.loadTodo();
             }}
           >
             All
           </button>
           <button
             onClick={() => {
-              setStatus('open');
+              todoList.openTodos();
             }}
           >
             Open
           </button>
           <button
             onClick={() => {
-              setStatus('finished');
+              todoList.finishedTodos();
             }}
           >
             Finished
           </button>
         </div>
-        {status === 'all'
-          ? todoList.list.map(todo => (
-              <TodoItem key={`${todo.id}-${todo.text}`} todo={todo} />
-            ))
-          : status === 'open'
-          ? todoList.openTodos.map(todo => (
-              <TodoItem key={`${todo.id}-${todo.text}`} todo={todo} />
-            ))
-          : todoList.finishedTodos.map(todo => (
-              <TodoItem key={`${todo.id}-${todo.text}`} todo={todo} />
-            ))}
+        {todoList.list.map(todo => (
+          <TodoItem key={`${todo.id}-${todo.text}`} todo={todo} />
+        ))}
       </div>
     </div>
   ));
