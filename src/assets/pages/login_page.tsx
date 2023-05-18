@@ -14,7 +14,7 @@ export default function LoginPage() {
   };
   const handleAuthorization = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const url = 'http://localhost:3000'; // Необходимо будет понять на необходимый url
+    const url = 'http://localhost:3000'; // Необходимо будет понять на необходимый url (в том плане, что если я буду перекидывать в github page, то нужно поменять url :D)
     fetch(url + '/login', {
       method: 'POST',
       headers: {
@@ -49,7 +49,7 @@ export default function LoginPage() {
             changeinfo('password', e.target.value);
           }}
         ></input>
-        <button></button>
+        <button>Вход</button>
       </form>
     </div>
   );
