@@ -6,7 +6,13 @@ import {
   runInAction,
 } from 'mobx';
 import { createContext, useContext } from 'react';
-import { deleteTodos, getIdTodos, getTodos, postTodos } from './api';
+import {
+  deleteTodos,
+  getIdTodos,
+  getTodos,
+  postTodos,
+  toggleTodos,
+} from './api';
 
 import { KeyboardEvent } from 'react';
 
@@ -35,7 +41,6 @@ export class TodoList {
 
   @action
   addTodo = (text: string) => {
-    console.log(this.list);
     postTodos(text).then(data => {
       this.list.push(new TodoItem(text, false));
     });
@@ -45,6 +50,15 @@ export class TodoList {
   removeTodo = (todo: TodoItem) => {
     getIdTodos(this.list.indexOf(todo)).then(result => {
       deleteTodos(result[0].id).then(an_res => {
+        this.list = [];
+        this.loadTodo();
+      });
+    });
+  };
+  @action
+  toogleTodo = (todo: TodoItem) => {
+    getIdTodos(this.list.indexOf(todo)).then(result => {
+      toggleTodos(result[0].id, result[0].isDone).then(an_res => {
         this.list = [];
         this.loadTodo();
       });
@@ -69,13 +83,13 @@ export default class TodoItem {
   @observable isDone: boolean = false;
 
   constructor(text: string, isDone: boolean) {
+    this.isDone = isDone;
     this.text = text;
     makeAutoObservable(this);
   }
 
   @action
   toggleIsDone = () => {
-    console.log(this.id);
     this.isDone = !this.isDone;
   };
 }

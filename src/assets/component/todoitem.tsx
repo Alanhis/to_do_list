@@ -10,7 +10,9 @@ export const TodoItem = ({ todo }: any) => {
           <span>{todo.text}</span>
           <input
             type="checkbox"
-            onChange={todo.toggleIsDone}
+            onChange={() => {
+              todoList.toogleTodo(todo);
+            }}
             defaultChecked={todo.isDone}
           ></input>
         </div>
