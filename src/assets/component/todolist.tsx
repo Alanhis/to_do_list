@@ -7,7 +7,6 @@ export const TodoList = () => {
   const [status, setStatus] = useState('all');
   useEffect(() => {
     todoList.loadTodo();
-    console.log(todoList);
   }, []);
   return useObserver(() => (
     <div className="todo-list">
