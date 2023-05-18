@@ -1,4 +1,5 @@
 import { useObserver } from 'mobx-react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../service/store';
 import { TodoList } from '../component/todolist';
@@ -8,9 +9,11 @@ export function ToDoPages() {
   const navigate = useNavigate();
   const todoList = useStore();
 
-  if (document.cookie == '') {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (document.cookie == '') {
+      navigate('/');
+    }
+  });
   return useObserver(() => (
     <>
       <div className="App">
