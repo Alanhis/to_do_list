@@ -1,4 +1,4 @@
-import { onEnterPress, useStore } from '../../service/store';
+import { useStore } from '../../service/store';
 import '../../App.css';
 export const TodoItem = ({ todo }: any) => {
   const todoList = useStore();

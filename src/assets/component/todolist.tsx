@@ -1,10 +1,10 @@
 import { useObserver } from 'mobx-react';
 import { useStore } from '../../service/store';
 import { TodoItem } from './todoitem';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 export const TodoList = () => {
   const todoList = useStore();
-  const [status, setStatus] = useState('all');
+
   useEffect(() => {
     todoList.loadTodo();
   }, []);

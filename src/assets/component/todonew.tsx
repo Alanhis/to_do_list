@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { onEnterPress, useStore } from '../../service/store';
 import '../../App.css';
 export const TodoNew = () => {
