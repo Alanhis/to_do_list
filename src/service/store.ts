@@ -16,6 +16,7 @@ import {
 } from './api';
 
 import { KeyboardEvent } from 'react';
+import uuid4 from 'uuid4';
 
 export class TodoList {
   @observable.shallow list: TodoItem[] = [];
@@ -29,12 +30,12 @@ export class TodoList {
       runInAction(() => {
         if (todo.length > 1) {
           todo.forEach(data => {
-            this.list.push(new TodoItem(data.text, data.isDone));
+            this.list.push(new TodoItem(data.text, data.isDone,data.id));
           });
         } else if (todo.length === 0) {
           return;
         } else {
-          this.list.push(new TodoItem(todo[0].text, todo[0].isDone));
+          this.list.push(new TodoItem(todo[0].text, todo[0].isDone, todo[0].id));
         }
       })
     );
@@ -42,19 +43,21 @@ export class TodoList {
 
   @action
   addTodo = (text: string) => {
-    postTodos(text).then(data => {
-      this.list.push(new TodoItem(text, false));
+    const id = uuid4();
+    postTodos(text,id).then(data => {
+      
+      this.list.push(new TodoItem(text, false,id));
     });
   };
 
   @action
   removeTodo = (todo: TodoItem) => {
-    getIdTodos(this.list.indexOf(todo)).then(result => {
-      deleteTodos(result[0].id).then(an_res => {
+      console.log(todo.id)
+      deleteTodos(todo.id).then(an_res => {
         this.list = [];
         this.loadTodo();
       });
-    });
+    ;
   };
   @action
   toogleTodo = (todo: TodoItem) => {
@@ -72,12 +75,12 @@ export class TodoList {
       runInAction(() => {
         if (todo.length > 1) {
           todo.forEach(data => {
-            this.list.push(new TodoItem(data.text, data.isDone));
+            this.list.push(new TodoItem(data.text, data.isDone,data.id));
           });
         } else if (todo.length === 0) {
           return;
         } else {
-          this.list.push(new TodoItem(todo[0].text, todo[0].isDone));
+          this.list.push(new TodoItem(todo[0].text, todo[0].isDone, todo[0].id));
         }
       })
     );
@@ -90,12 +93,12 @@ export class TodoList {
       runInAction(() => {
         if (todo.length > 1) {
           todo.forEach(data => {
-            this.list.push(new TodoItem(data.text, data.isDone));
+            this.list.push(new TodoItem(data.text, data.isDone,data.id));
           });
         } else if (todo.length === 0) {
           return;
         } else {
-          this.list.push(new TodoItem(todo[0].text, todo[0].isDone));
+          this.list.push(new TodoItem(todo[0].text, todo[0].isDone, todo[0].id));
         }
       })
     );
@@ -103,14 +106,15 @@ export class TodoList {
 }
 
 export default class TodoItem {
-  id = Date.now();
+  id = "";
 
   @observable text: string = '';
   @observable isDone: boolean = false;
 
-  constructor(text: string, isDone: boolean) {
+  constructor(text: string, isDone: boolean, id: string) {
     this.isDone = isDone;
     this.text = text;
+    this.id= id
     makeAutoObservable(this);
   }
 }

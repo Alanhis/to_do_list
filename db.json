@@ -16,16 +16,5 @@
       "id": 3
     }
   ],
-  "todo": [
-    {
-      "text": "test",
-      "isDone": false,
-      "id": 1684424714797
-    },
-    {
-      "text": "amongus",
-      "isDone": true,
-      "id": 1684424816398
-    }
-  ]
+  "todo": []
 }

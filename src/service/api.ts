@@ -1,21 +1,22 @@
 import TodoItem from './store';
-
+import uuid4 from "uuid4";
 export const getTodos = async (): Promise<TodoItem[]> => {
   return await fetch('http://localhost:3000/todo').then(res => res.json());
 };
 
-export const postTodos = async (text: string): Promise<TodoItem[]> => {
+export const postTodos = async (text: string,id: string): Promise<TodoItem[]> => {
   return await fetch('http://localhost:3000/todo', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       text: text,
       isDone: false,
-      id: Date.now(),
+      id: id,
     }),
   }).then(res => res.json());
 };
-export const deleteTodos = async (id: number): Promise<TodoItem[]> => {
+export const deleteTodos = async (id: string): Promise<TodoItem[]> => {
+
   return await fetch('http://localhost:3000/todo/' + id, {
     method: 'DELETE',
 
@@ -23,7 +24,7 @@ export const deleteTodos = async (id: number): Promise<TodoItem[]> => {
   }).then(res => res.json());
 };
 export const toggleTodos = async (
-  id: number,
+  id: string,
   toogle: boolean
 ): Promise<TodoItem[]> => {
   return await fetch('http://localhost:3000/todo/' + id, {

@@ -1,5 +1,5 @@
-import { useStore } from '../../service/store';
-import '../../App.css';
+import { useStore } from "../../service/store";
+import "../../App.css";
 export const TodoItem = ({ todo }: any) => {
   const todoList = useStore();
 
@@ -17,7 +17,14 @@ export const TodoItem = ({ todo }: any) => {
           ></input>
         </div>
 
-        <button onClick={() => todoList.removeTodo(todo)}>X</button>
+        <button
+          onClick={() => {
+            console.log(todo.id);
+            todoList.removeTodo(todo);
+          }}
+        >
+          X
+        </button>
       </div>
     </div>
   );
